@@ -39,6 +39,16 @@
         </div>
     </nav>
 
+    <!-- Mensajes de Alerta -->
+    <?php if (isset($_GET['registro']) && $_GET['registro'] == 'exito'): ?>
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                <strong>¡Registro completado!</strong> Tu cuenta y la de tu mascota se han creado correctamente. Ya puedes iniciar sesión.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- Sección Principal (Hero Banner) -->
     <header class="hero-section text-center text-white d-flex align-items-center">
         <div class="container">
