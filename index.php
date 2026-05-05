@@ -1,5 +1,6 @@
 <?php
-// vet_burgos/index.php
+
+session_start();
 
 require_once 'config/database.php';
 

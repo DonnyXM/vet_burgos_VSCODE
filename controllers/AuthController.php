@@ -67,4 +67,46 @@ class AuthController
             exit();
         }
     }
+    /**
+     * Procesa los datos enviados por el formulario de inicio de sesión (POST)
+     */
+    public function procesarLogin()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = trim($_POST['email']);
+            $password = $_POST['password'];
+
+            $modeloUsuario = new Usuario();
+            $usuarioValidado = $modeloUsuario->login($email, $password);
+
+            if ($usuarioValidado) {
+                // ¡Éxito! Guardamos los datos del usuario en la "pulsera VIP" (Sesión)
+                $_SESSION['usuario_id'] = $usuarioValidado['id_usuario'];
+                $_SESSION['usuario_nombre'] = $usuarioValidado['nombre'];
+                $_SESSION['usuario_rol'] = $usuarioValidado['rol'];
+
+                // Redirigimos al inicio indicando que el login fue exitoso
+                header("Location: index.php?controller=Home&action=index&login=exito");
+                exit();
+            } else {
+                // Si falla (mal correo o contraseña), volvemos a la vista de login con error
+                header("Location: index.php?controller=Auth&action=login&error=credenciales");
+                exit();
+            }
+        }
+    }
+
+    /**
+     * Cierra la sesión del usuario y borra la "pulsera VIP"
+     */
+    public function logout()
+    {
+        // Destruimos todas las variables de sesión de forma segura
+        session_unset();
+        session_destroy();
+
+        // Redirigimos a la página de inicio
+        header("Location: index.php");
+        exit();
+    }
 }

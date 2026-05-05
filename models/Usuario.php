@@ -34,4 +34,37 @@ class Usuario
             return false;
         }
     }
+
+    /**
+     * Verifica las credenciales de un usuario para el inicio de sesión.
+     * 
+     * @param string $email Correo electrónico del usuario
+     * @param string $password Contraseña escrita en el formulario
+     * @return array|bool Retorna un array con los datos si es correcto, o false si falla.
+     */
+    public function login($email, $password)
+    {
+        try {
+            // 1. Buscamos al usuario por su email en la BD
+            $sql = "SELECT id_usuario, nombre, email, password, rol FROM usuarios WHERE email = :email";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+
+            // 2. Obtenemos la fila de la base de datos como un array asociativo
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // 3. Si el usuario existe, verificamos la contraseña
+            // password_verify es la función de PHP que compara el texto plano con el hash guardado
+            if ($usuario && password_verify($password, $usuario['password'])) {
+                // Por seguridad, quitamos la contraseña del array antes de devolver los datos
+                unset($usuario['password']);
+                return $usuario;
+            } else {
+                return false; // Credenciales incorrectas
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
