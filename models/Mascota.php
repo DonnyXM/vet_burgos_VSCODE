@@ -30,4 +30,33 @@ class Mascota
             return false;
         }
     }
+
+    /**
+     * Obtiene todas las mascotas asociadas a un ID de usuario específico.
+     * 
+     * @param int $id_dueno El ID del usuario logueado
+     * @return array Retorna un array con todas las mascotas (o un array vacío si no tiene)
+     */
+    public function obtenerMascotasPorUsuario($id_dueno)
+    {
+        try {
+            // 1. Preparamos la consulta SQL. 
+            // Seleccionamos todo (*) de la tabla mascotas donde el dueño coincida.
+            $sql = "SELECT * FROM mascotas WHERE id_dueno = :id_dueno";
+            $stmt = $this->db->prepare($sql);
+
+            // 2. Vinculamos el parámetro por seguridad (evita inyección SQL)
+            $stmt->bindParam(':id_dueno', $id_dueno);
+
+            // 3. Ejecutamos la consulta
+            $stmt->execute();
+
+            // 4. Devolvemos todos los resultados como un array asociativo
+            // FETCH_ASSOC hace que las columnas de la BD sean las claves del array (ej: $fila['nombre'])
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Si hay un error, devolvemos un array vacío para que no se rompa la vista
+            return [];
+        }
+    }
 }

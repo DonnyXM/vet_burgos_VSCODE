@@ -30,10 +30,27 @@
                     <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
                 </ul>
-                <div class="d-flex gap-2">
-                    <!-- En el futuro, estos botones llamarán a tu controlador de Auth -->
-                    <a href="index.php?controller=Auth&action=login" class="btn btn-outline-dark">Iniciar Sesión</a>
-                    <a href="index.php?controller=Auth&action=registro" class="btn btn-dark">Registrarse</a>
+                <div class="d-flex gap-2 align-items-center">
+                    <?php
+                    // Comprobamos si existe la variable de sesión 'usuario_id'
+                    if (isset($_SESSION['usuario_id'])):
+                    ?>
+                        <!-- SI EL USUARIO ESTÁ LOGUEADO -->
+                        <span class="text-muted me-3 fw-bold">
+                            <i class="fa-solid fa-user-circle"></i> ¡Hola, <?php echo $_SESSION['usuario_nombre']; ?>!
+                        </span>
+
+                        <!-- Botón para ir a su panel (Aún no lo hemos creado, pero dejamos el enlace listo) -->
+                        <a href="index.php?controller=Cliente&action=dashboard" class="btn btn-outline-primary">Mi Panel</a>
+
+                        <!-- Botón para cerrar sesión -->
+                        <a href="index.php?controller=Auth&action=logout" class="btn btn-danger">Cerrar Sesión</a>
+
+                    <?php else: ?>
+                        <!-- SI EL USUARIO NO ESTÁ LOGUEADO (Visitante normal) -->
+                        <a href="index.php?controller=Auth&action=login" class="btn btn-outline-dark">Iniciar Sesión</a>
+                        <a href="index.php?controller=Auth&action=registro" class="btn btn-dark">Registrarse</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

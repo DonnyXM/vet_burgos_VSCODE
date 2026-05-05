@@ -38,3 +38,49 @@ body {
 .custom-card:hover .icon-box i {
     transform: scale(1.2);
 }
+
+/* =========================================
+   ESTILOS DEL PANEL (DASHBOARD CLIENTE)
+   ========================================= */
+
+/* Efecto hover suave para los enlaces del menú lateral */
+.nav-hover {
+    transition: all 0.2s ease;
+}
+
+.nav-hover:hover {
+    background-color: #f8f9fa;
+    /* Gris clarito */
+    transform: translateX(5px);
+    /* Se mueve un poco a la derecha */
+}
+
+/* Efecto hover para las tarjetas de mascotas */
+.pet-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Diseño del Botón Flotante de Acción (FAB) */
+.btn-flotante {
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.btn-flotante:hover {
+    transform: scale(1.1) rotate(90deg);
+    /* Se agranda y gira ligeramente al pasar el ratón */
+}
+
+/* Ajustes para móviles: ocultamos el sidebar lateral si la pantalla es muy pequeña */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none !important;
+    }
+}
