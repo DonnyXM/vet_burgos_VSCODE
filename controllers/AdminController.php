@@ -1,6 +1,8 @@
 <?php
 
 require_once 'models/Cita.php';
+require_once 'models/Usuario.php';
+require_once 'models/Mascota.php';
 
 class AdminController
 {
@@ -55,5 +57,31 @@ class AdminController
         // Después de actualizar, recargamos el panel
         header("Location: index.php?controller=Admin&action=dashboard");
         exit();
+    }
+
+    /**
+     * Muestra la lista de clientes
+     */
+    public function clientes()
+    {
+        $this->verificarAcceso();
+
+        $modeloUsuario = new Usuario();
+        $clientes = $modeloUsuario->obtenerTodosLosClientes();
+
+        require_once 'views/admin/clientes.php';
+    }
+
+    /**
+     * Muestra la lista de pacientes (mascotas)
+     */
+    public function pacientes()
+    {
+        $this->verificarAcceso();
+
+        $modeloMascota = new Mascota();
+        $pacientes = $modeloMascota->obtenerTodasLasMascotas();
+
+        require_once 'views/admin/pacientes.php';
     }
 }

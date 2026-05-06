@@ -67,4 +67,24 @@ class Usuario
             return false;
         }
     }
+
+    /**
+     * Obtiene todos los usuarios que son clientes y cuenta cuántas mascotas tienen
+     */
+    public function obtenerTodosLosClientes()
+    {
+        try {
+            $sql = "SELECT u.id_usuario, u.nombre, u.email, COUNT(m.id_mascota) AS total_mascotas 
+                    FROM usuarios u 
+                    LEFT JOIN mascotas m ON u.id_usuario = m.id_dueno 
+                    WHERE u.rol = 'cliente' 
+                    GROUP BY u.id_usuario 
+                    ORDER BY u.nombre ASC";
+
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
 }

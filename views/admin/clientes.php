@@ -87,73 +87,36 @@
         <div class="flex-grow-1 overflow-auto p-3 p-md-5">
 
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold mb-0">Gestión de Citas</h3>
+                <h3 class="fw-bold mb-0">Listado de Clientes</h3>
             </div>
 
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                 <div class="card-body p-0">
-                    <!-- table-responsive permite scroll horizontal en móviles sin romper la pantalla -->
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0" style="min-width: 800px;">
+                        <table class="table table-hover align-middle mb-0" style="min-width: 600px;">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="py-3 px-4">Fecha y Hora</th>
-                                    <th class="py-3">Cliente</th>
-                                    <th class="py-3">Paciente</th>
-                                    <th class="py-3">Servicio</th>
-                                    <th class="py-3">Estado</th>
-                                    <th class="py-3 px-4 text-center">Acciones</th>
+                                    <th class="py-3 px-4">ID</th>
+                                    <th class="py-3">Nombre del Cliente</th>
+                                    <th class="py-3">Correo Electrónico</th>
+                                    <th class="py-3 text-center">Nº de Mascotas</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($citas)): ?>
+                                <?php if (empty($clientes)): ?>
                                     <tr>
-                                        <td colspan="6" class="text-center py-5 text-muted">
-                                            No hay citas registradas en el sistema.
-                                        </td>
+                                        <td colspan="4" class="text-center py-5 text-muted">No hay clientes registrados.</td>
                                     </tr>
                                 <?php else: ?>
-                                    <?php foreach ($citas as $cita):
-                                        $badge_class = 'bg-warning text-dark';
-                                        if ($cita['estado'] == 'Completada') $badge_class = 'bg-success';
-                                        if ($cita['estado'] == 'Cancelada') $badge_class = 'bg-danger';
-                                    ?>
+                                    <?php foreach ($clientes as $cliente): ?>
                                         <tr>
-                                            <td class="py-3 px-4">
-                                                <div class="fw-bold"><?php echo date('d/m/Y', strtotime($cita['fecha'])); ?></div>
-                                                <div class="small text-muted"><?php echo date('H:i', strtotime($cita['hora'])); ?></div>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($cita['cliente_nombre']); ?>
-                                            </td>
-                                            <td>
-                                                <strong><?php echo htmlspecialchars($cita['mascota_nombre']); ?></strong>
-                                                <span class="text-muted small">(<?php echo htmlspecialchars($cita['especie']); ?>)</span>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($cita['nombre_servicio']); ?>
-                                                <?php if (!empty($cita['motivo'])): ?>
-                                                    <i class="fa-solid fa-circle-info text-info ms-1" title="<?php echo htmlspecialchars($cita['motivo']); ?>" style="cursor: help;"></i>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <span class="badge <?php echo $badge_class; ?> rounded-pill px-3 py-2">
-                                                    <?php echo $cita['estado']; ?>
+                                            <td class="py-3 px-4 text-muted">#<?php echo $cliente['id_usuario']; ?></td>
+                                            <td class="fw-bold"><?php echo htmlspecialchars($cliente['nombre']); ?></td>
+                                            <td><?php echo htmlspecialchars($cliente['email']); ?></td>
+                                            <td class="text-center">
+                                                <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                    <?php echo $cliente['total_mascotas']; ?>
                                                 </span>
-                                            </td>
-                                            <td class="px-4 text-center">
-                                                <?php if ($cita['estado'] == 'Pendiente'): ?>
-                                                    <div class="d-flex justify-content-center gap-1">
-                                                        <a href="index.php?controller=Admin&action=cambiarEstado&id=<?php echo $cita['id_cita']; ?>&estado=Completada" class="btn btn-sm btn-outline-success rounded-circle" title="Marcar como Completada">
-                                                            <i class="fa-solid fa-check"></i>
-                                                        </a>
-                                                        <a href="index.php?controller=Admin&action=cambiarEstado&id=<?php echo $cita['id_cita']; ?>&estado=Cancelada" class="btn btn-sm btn-outline-danger rounded-circle" title="Cancelar Cita">
-                                                            <i class="fa-solid fa-xmark"></i>
-                                                        </a>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <span class="text-muted small">Cerrada</span>
-                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -163,7 +126,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

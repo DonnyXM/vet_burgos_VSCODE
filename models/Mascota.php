@@ -59,4 +59,21 @@ class Mascota
             return [];
         }
     }
+    /**
+     * Obtiene todas las mascotas registradas en la clínica junto con el nombre de su dueño
+     */
+    public function obtenerTodasLasMascotas()
+    {
+        try {
+            $sql = "SELECT m.id_mascota, m.nombre AS mascota_nombre, m.especie, m.raza, u.nombre AS dueno_nombre 
+                    FROM mascotas m 
+                    INNER JOIN usuarios u ON m.id_dueno = u.id_usuario 
+                    ORDER BY m.nombre ASC";
+
+            $stmt = $this->db->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
 }
