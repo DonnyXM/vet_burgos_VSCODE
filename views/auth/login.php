@@ -1,4 +1,3 @@
-<!-- views/auth/login.php -->
 <!DOCTYPE html>
 <html lang="es">
 

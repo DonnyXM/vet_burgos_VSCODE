@@ -70,6 +70,9 @@ class AuthController
     /**
      * Procesa los datos enviados por el formulario de inicio de sesión (POST)
      */
+    /**
+     * Procesa los datos enviados por el formulario de inicio de sesión (POST)
+     */
     public function procesarLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -80,16 +83,23 @@ class AuthController
             $usuarioValidado = $modeloUsuario->login($email, $password);
 
             if ($usuarioValidado) {
-                // ¡Éxito! Guardamos los datos del usuario en la "pulsera VIP" (Sesión)
+                // Guardamos los datos en sesión
                 $_SESSION['usuario_id'] = $usuarioValidado['id_usuario'];
                 $_SESSION['usuario_nombre'] = $usuarioValidado['nombre'];
                 $_SESSION['usuario_rol'] = $usuarioValidado['rol'];
 
-                // Redirigimos al inicio indicando que el login fue exitoso
-                header("Location: index.php?controller=Home&action=index&login=exito");
+                // Limpiamos el rol de espacios y lo pasamos a minúsculas
+                $rol_seguro = strtolower(trim($_SESSION['usuario_rol']));
+
+                // Redirección inteligente según el rol 
+                if ($rol_seguro === 'veterinario' || $rol_seguro === 'admin') {
+                    header("Location: index.php?controller=Admin&action=dashboard");
+                } else {
+                    header("Location: index.php?controller=Cliente&action=dashboard");
+                }
                 exit();
             } else {
-                // Si falla (mal correo o contraseña), volvemos a la vista de login con error
+                // ¡NUEVO!: Si falla la validación, lo devolvemos al login con un aviso de error
                 header("Location: index.php?controller=Auth&action=login&error=credenciales");
                 exit();
             }
