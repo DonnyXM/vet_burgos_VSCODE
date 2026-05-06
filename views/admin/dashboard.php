@@ -52,7 +52,7 @@
                     <i class="fa-solid fa-user-doctor fa-2x"></i>
                 </div>
                 <h6 class="fw-bold mb-0"><?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></h6>
-                <small class="text-info">Veterinario / Admin</small>
+                <small class="text-info">Admin</small>
             </div>
 
             <ul class="nav nav-pills flex-column mb-auto gap-2">

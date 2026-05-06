@@ -57,7 +57,7 @@
 
             <ul class="nav nav-pills flex-column mb-auto gap-2">
                 <li class="nav-item">
-                    <a href="index.php?controller=Admin&action=dashboard" class="nav-link active bg-primary text-white fw-bold rounded-3">
+                    <a href="index.php?controller=Admin&action=dashboard" class="nav-link text-white opacity-75 nav-hover rounded-3">
                         <i class="fa-solid fa-calendar-days me-2"></i> Agenda de Citas
                     </a>
                 </li>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?controller=Admin&action=pacientes" class="nav-link text-white opacity-75 nav-hover rounded-3">
+                    <a href="index.php?controller=Admin&action=pacientes" class="nav-link active bg-primary text-white fw-bold rounded-3">
                         <i class="fa-solid fa-dog me-2"></i> Pacientes
                     </a>
                 </li>
