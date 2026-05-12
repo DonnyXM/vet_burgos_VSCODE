@@ -1,5 +1,4 @@
 <?php
-// models/Mascota.php
 
 require_once 'config/database.php';
 

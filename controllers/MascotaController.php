@@ -28,7 +28,7 @@ class MascotaController
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['usuario_id'])) {
 
             // 1. Recogemos los datos
-            $id_dueno = $_SESSION['usuario_id']; // El ID lo sacamos de la sesión, ¡es muy seguro!
+            $id_dueno = $_SESSION['usuario_id'];
             $nombre = trim($_POST['nombre']);
             $especie = $_POST['especie'];
             $raza = trim($_POST['raza']);
