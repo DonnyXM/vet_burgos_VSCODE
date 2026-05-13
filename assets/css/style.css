@@ -1,0 +1,84 @@
+/* Fuente */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Diseño de la sección principal (Hero) con imagen de fondo */
+.hero-section {
+    height: 70vh;
+    /* Ocupa el 70% de la altura de la pantalla */
+    /* Usamos un degradado azul semi-transparente sobre una imagen de prueba de Unsplash */
+    background: linear-gradient(rgba(10, 40, 80, 0.7), rgba(10, 40, 80, 0.6)),
+        url('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* Efecto parallax suave */
+}
+
+/* Efectos para las tarjetas de servicios */
+.custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.icon-box i {
+    transition: transform 0.3s ease;
+}
+
+.custom-card:hover .icon-box i {
+    transform: scale(1.2);
+}
+
+/* =========================================
+   ESTILOS DEL PANEL (DASHBOARD CLIENTE)
+   ========================================= */
+
+/* Efecto hover suave para los enlaces del menú lateral */
+.nav-hover {
+    transition: all 0.2s ease;
+}
+
+.nav-hover:hover {
+    background-color: #f8f9fa;
+    /* Gris clarito */
+    transform: translateX(5px);
+    /* Se mueve un poco a la derecha */
+}
+
+/* Efecto hover para las tarjetas de mascotas */
+.pet-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Diseño del Botón Flotante de Acción (FAB) */
+.btn-flotante {
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.btn-flotante:hover {
+    transform: scale(1.1) rotate(90deg);
+    /* Se agranda y gira ligeramente al pasar el ratón */
+}
+
+/* Ajustes para móviles: ocultamos el sidebar lateral si la pantalla es muy pequeña */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none !important;
+    }
+}
